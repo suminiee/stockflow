@@ -11,4 +11,8 @@ public class TestController {
     @GetMapping("/api/test")
     @Operation(summary = "test api", description = "테스트 용도이며 Hello world 반환")
     public String test() { return "Hello world!"; }
+
+    @GetMapping("/api/test2")
+    @Operation(summary = "test api2", description = "테스트 용도이며 AI commit message test 반환")
+    public String test2() { return "AI commit message test"; }
 }
