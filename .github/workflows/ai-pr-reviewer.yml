@@ -4,7 +4,7 @@ on:
   pull_request:
     types: [opened, synchronize]
 
-permissions: #권한설정
+permissions:
   contents: read
   pull-requests: write
 
@@ -18,10 +18,13 @@ jobs:
           fetch-depth: 0
 
       - name: AI Code Review
-        uses: tmknom/openai-code-reviewer-action@v0
+        # 🌟 매우 안정적인 다른 액션으로 교체
+        uses: stefanzweifel/git-auto-commit-action@v5 # (선택사항: 리뷰 후 자동 커밋이 필요할 때)
+
+      - name: OpenAI PR Reviewer
+        uses: midudev/chatgpt-action@v0.2.0
         with:
-          openai_api_key: ${{ secrets.OPENAI_API_KEY }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          # 한국어 리뷰
-          LANGUAGE: Korean
-          MODEL: gpt-4o # 또는 gpt-3.5-turbo
+          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          model: gpt-4o
+          language: ko-KR # 한국어 설정
