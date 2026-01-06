@@ -4,7 +4,7 @@ on:
   pull_request:
     types: [opened, synchronize]
 
-permissions: #권한설정
+permissions:
   contents: read
   pull-requests: write
 
@@ -18,10 +18,14 @@ jobs:
           fetch-depth: 0
 
       - name: AI Code Review
-        uses: anc95/ChatGPT-CodeReview@main # 오픈소스 액션 활용
+        uses: coderabbitai/ai-pr-reviewer@latest
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          # 한국어 리뷰
-          LANGUAGE: Korean
-          MODEL: gpt-4 # 또는 gpt-3.5-turbo
+        with:
+          debug: false
+          review_simple_patch: false
+          system_message: |
+            당신은 전문적인 풀 리퀘스트 리뷰어입니다. 
+            한국어로 친절하고 상세하게 답변해 주세요. 
+            코드의 버그, 보안 위협, 가독성 및 성능 개선 사항을 중점적으로 봐주세요.
