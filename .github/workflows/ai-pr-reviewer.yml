@@ -18,13 +18,14 @@ jobs:
           fetch-depth: 0
 
       - name: AI Code Review
-        # 🌟 매우 안정적인 다른 액션으로 교체
-        uses: stefanzweifel/git-auto-commit-action@v5 # (선택사항: 리뷰 후 자동 커밋이 필요할 때)
-
-      - name: OpenAI PR Reviewer
-        uses: midudev/chatgpt-action@v0.2.0
+        uses: coderabbitai/ai-pr-reviewer@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         with:
-          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          model: gpt-4o
-          language: ko-KR # 한국어 설정
+          debug: false
+          review_simple_patch: false
+          system_message: |
+            당신은 전문적인 풀 리퀘스트 리뷰어입니다. 
+            한국어로 친절하고 상세하게 답변해 주세요. 
+            코드의 버그, 보안 위협, 가독성 및 성능 개선 사항을 중점적으로 봐주세요.
