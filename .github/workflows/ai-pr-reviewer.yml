@@ -24,4 +24,4 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           # 한국어 리뷰
           LANGUAGE: Korean
-          MODEL: gpt-4 # 또는 gpt-3.5-turbo
+          MODEL: gpt-4o # 또는 gpt-3.5-turbo
