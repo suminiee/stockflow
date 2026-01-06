@@ -18,10 +18,10 @@ jobs:
           fetch-depth: 0
 
       - name: AI Code Review
-        uses: anc95/ChatGPT-CodeReview@main # 오픈소스 액션 활용
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        uses: tmknom/openai-code-reviewer-action@v0
+        with:
+          openai_api_key: ${{ secrets.OPENAI_API_KEY }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           # 한국어 리뷰
           LANGUAGE: Korean
           MODEL: gpt-4o # 또는 gpt-3.5-turbo
