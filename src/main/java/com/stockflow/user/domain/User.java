@@ -38,4 +38,13 @@ public class User extends BaseTimeEntity {
 
     @Column(name = "point")
     private Long point;
+
+    /**
+     * 사용자의 이름을 업데이트하는 메서드
+     * 카카오 프로필 정보가 변경되었을 때 호출됩니다.
+     */
+    public User update(String name) {
+        this.name = name;
+        return this;
+    }
 }
